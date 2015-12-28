@@ -1,6 +1,18 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package multichatclient;
+
 import java.net.*;
 import java.io.*;
 import java.util.*;
+
+/**
+ *
+ * @author Gabriele De Rosa
+ */
 
 public class MultichatClient
 {
@@ -8,13 +20,13 @@ public class MultichatClient
 		try
 		{
 			Scanner scanner = new Scanner(System.in);
-			System.out.print("사용할 ID입력 : ");
+			System.out.print("Inserisci il tuo Username: ");
 			String name = scanner.nextLine();
-			System.out.print("접속할 Ip입력 : ");
+			System.out.print("IP del server: ");
 			String serverIp = scanner.nextLine();
 			Socket socket=new Socket(serverIp,7777);
 
-			System.out.println("연결완료");
+			System.out.println("Connessione completata");
 
 			Thread sender = new Thread(new ClientSender(socket, name));
 			Thread receiver = new Thread(new ClientReceiver(socket));
@@ -30,7 +42,7 @@ public class MultichatClient
 	static class ClientSender extends Thread
 	{
 		Socket socket;
-		DataOutputStream out;                         // 입력 ㅋ를래ㅅ 
+		DataOutputStream out;
 		String name;
 
 		ClientSender(Socket socket,String name){
@@ -66,7 +78,7 @@ public class MultichatClient
 		}
 	}
 
-	static class ClientReceiver extends Thread               // 출력 클래스
+	static class ClientReceiver extends Thread
 	{
 		Socket socket;
 		DataInputStream in;
@@ -86,7 +98,7 @@ public class MultichatClient
 			try
 			{
 				while(true){
-				System.out.println('\n'+in.readUTF());
+				System.out.println('\n'+in.readUTF()+'\n');
 				}
 			}
 			catch (IOException e)

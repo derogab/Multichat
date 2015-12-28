@@ -1,13 +1,24 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package multichatserver;
+
 import java.net.*;
 import java.io.*;
 import java.util.*;
+/**
+ *
+ * @author Gabriele De Rosa
+ */
 
 public class MultichatServer
 {
 	HashMap clients;
 
 	MultichatServer(){
-		clients = new HashMap();    //hashmap = key와 value를 가진다.
+		clients = new HashMap();    //hashmap = have key value.
 		Collections.synchronizedMap(clients); //synchronized
 	}
 
@@ -17,12 +28,12 @@ public class MultichatServer
 
 		try
 		{
-			serverSocket=new ServerSocket(7777);         //서버소켓 = 7777
-			System.out.println("서버가 열렸습니다.");
+			serverSocket=new ServerSocket(7777);         //presa Server = 7777
+			System.out.println("횊 stato aperto il server.");
 
 			while(true){
 				socket = serverSocket.accept();
-				System.out.println("["+socket.getInetAddress()+"]에서 접속하셨습니다.");
+				System.out.println("Si ha accesso a["+socket.getInetAddress()+"].");
 
 				S_input thread = new S_input(socket);
 				thread.start();
@@ -81,10 +92,10 @@ public class MultichatServer
 			try
 			{
 				name = in.readUTF();
-				send(name+"님이 입장하셨습니다.");
+				send(name+"Sei stato in una posizione.");
 
 				clients.put(name, out);
-				System.out.println("현재 접속자수는 "+clients.size()+"입니다");
+				System.out.println("Il numero attuale di utenti 챔 "+clients.size());
 				
 				while(in!=null){
 					send(in.readUTF());
@@ -94,8 +105,8 @@ public class MultichatServer
 			{
 
 			} finally{
-				System.out.println(name+"님이 퇴장하셨습니다.");
-				send(name+"님이 퇴장하셨습니다.");
+				System.out.println(name+"Guard챵 il cartellino rosso.");
+				send(name+"Guard챵 il cartellino rosso.");
 				clients.remove(name);
 			}
 		}
